@@ -3,6 +3,7 @@ import { Playfair_Display, Inter, Cormorant_Garamond } from "next/font/google";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import ScrollReveal from "./components/ScrollReveal/ScrollReveal";
+import { Analytics } from "@vercel/analytics/react";
 
 // Self-hosted via Next.js → zéro round-trip réseau externe, préchargé automatiquement
 const playfairDisplay = Playfair_Display({
@@ -62,6 +63,7 @@ export default function RootLayout({ children }) {
         {children}
         <Footer />
         <ScrollReveal />
+        <Analytics />
       </body>
     </html>
   );

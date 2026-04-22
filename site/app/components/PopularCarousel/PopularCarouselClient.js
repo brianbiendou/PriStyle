@@ -7,6 +7,17 @@ import styles from "./PopularCarousel.module.css";
 const SPEED = 54;          // px/s — identique à l'animation CSS originale (240s)
 const RESUME_DELAY = 5000; // ms avant reprise auto après drag
 
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+
+function buildWaLink(src) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://pristyle.vercel.app';
+  const storagePrefix = process.env.NEXT_PUBLIC_SUPABASE_URL + '/storage/v1/object/public/catalog-media/';
+  const imagePath = src.startsWith(storagePrefix) ? src.slice(storagePrefix.length) : src;
+  const shareUrl = `${siteUrl}/p/${imagePath}`;
+  const msg = encodeURIComponent(`Bonjour, je suis intéressé(e) par ce modèle PriStyle : ${shareUrl}`);
+  return `https://wa.me/${WA_NUMBER}?text=${msg}`;
+}
+
 function shuffleArray(arr) {
   const copy = [...arr];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -128,10 +139,12 @@ export default function PopularCarouselClient({ items }) {
               />
               <div className={styles.overlay}>
                 <a
-                  href="https://wa.me/33644814218"
+                  href={buildWaLink(item.src)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.ctaBtn}
+                  onPointerDown={e => e.stopPropagation()}
+                  onClick={e => e.stopPropagation()}
                 >
                   ✦ Commander sur mesure
                 </a>
