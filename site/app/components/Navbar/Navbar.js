@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
@@ -8,25 +9,35 @@ import styles from "./Navbar.module.css";
 const NAV_ITEMS = [
   { label: "Accueil", href: "#" },
   { label: "Collections", href: "#collections" },
-  { label: "Femme", href: "#femme" },
-  { label: "Homme", href: "#homme" },
-  { label: "Mariage", href: "#mariage" },
+  { label: "Femme", href: "/femme" },
+  { label: "Homme", href: "/homme" },
+  { label: "Mariage", href: "/mariage" },
   { label: "À propos", href: "#apropos" },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  // Sur les pages de collection, la navbar est TOUJOURS opaque
+  const [scrolled, setScrolled] = useState(!isHome);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [heroVisible, setHeroVisible] = useState(true);
+  const [heroVisible, setHeroVisible] = useState(false);
 
   useEffect(() => {
+    if (!isHome) {
+      setScrolled(true);
+      setHeroVisible(false);
+      return;
+    }
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
       setHeroVisible(window.scrollY < window.innerHeight * 0.7);
     };
+    handleScroll(); // vérifier au montage
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHome]);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
@@ -47,7 +58,7 @@ export default function Navbar() {
               width={120}
               height={45}
               className={styles.logoImage}
-              style={{ width: "auto", height: "auto" }}
+              style={{ width: "auto" }}
               priority
             />
           </Link>

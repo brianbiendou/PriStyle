@@ -1,5 +1,5 @@
 .section {
-  padding: var(--space-5xl) 0 var(--space-4xl);
+  padding: var(--space-3xl) 0;
   background: linear-gradient(
     180deg,
     var(--color-cream) 0%,
@@ -21,69 +21,159 @@
   pointer-events: none;
 }
 
-.content {
-  max-width: 700px;
+.container {
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 var(--container-padding);
-  text-align: center;
   position: relative;
   z-index: 1;
 }
 
-.whatsappIcon {
-  width: 80px;
-  height: 80px;
+.header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.title {
+  margin-bottom: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+.colTitle {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-black);
+  margin-bottom: var(--space-lg);
+}
+
+/* ===== GAUCHE : COORDONNÉES ===== */
+.coordonnees {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.card {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+  padding: var(--space-lg) 0;
+}
+
+.cardIcon {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #25D366, #128C7E);
+  background: rgba(200, 169, 97, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto var(--space-xl);
-  font-size: 2rem;
-  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.3);
-  animation: whatsappPulse 3s ease-in-out infinite;
+  font-size: 1.1rem;
+  flex-shrink: 0;
 }
 
-.subtitle {
-  font-family: var(--font-accent);
-  font-size: 1.15rem;
-  color: var(--color-gray);
-  line-height: 1.7;
-  margin-bottom: var(--space-2xl);
-  font-style: italic;
-}
-
-.phone {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  color: var(--color-black);
-  font-weight: 600;
-  margin-bottom: var(--space-2xl);
-  letter-spacing: 0.05em;
-}
-
-.ctaGroup {
+.cardBody {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 2px;
+}
+
+.cardLabel {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-black);
+}
+
+.cardSub {
+  font-size: 0.8rem;
+  color: var(--color-gray);
+}
+
+.cardValue {
+  font-size: 0.85rem;
+  color: var(--color-gold);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* ===== DROITE : LOCALISATION ===== */
+.localisation {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-md);
 }
 
-.orText {
-  font-size: 0.8rem;
-  color: var(--color-gray-light);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+.mapWrapper {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 210px;
+  box-shadow: var(--shadow-sm);
 }
 
-@keyframes whatsappPulse {
-  0%, 100% { 
-    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.3);
-    transform: scale(1);
-  }
-  50% { 
-    box-shadow: 0 12px 40px rgba(37, 211, 102, 0.45);
-    transform: scale(1.05);
+.map {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.mapOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: var(--space-md);
+  transition: background 0.3s ease;
+}
+
+.mapOverlay:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.mapCta {
+  background: white;
+  color: var(--color-black);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  letter-spacing: 0.02em;
+}
+
+.addressCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  background: white;
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.addressIcon {
+  font-size: 1.2rem;
+}
+
+.addressLine {
+  font-size: 0.82rem;
+  color: var(--color-gold);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
+

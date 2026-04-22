@@ -1,14 +1,17 @@
-"use client";
-
-import Image from "next/image";
 import styles from "./EnfantSection.module.css";
+import EnfantGrid from "./EnfantGrid";
+import { getEnfantPairs } from "@/lib/data";
 
-const ENFANT_IMAGES = [
-  { src: "/images/categories/enfant-1.webp", alt: "Robe wax pour fille" },
-  { src: "/images/categories/enfant-2.webp", alt: "Tenue wax enfant" },
+const FALLBACK_PAIRS = [
+  { front: "/images/categories/enfant-1.webp", back: "/images/categories/enfant-2.webp" },
+  { front: "/images/categories/enfant-1.webp", back: "/images/categories/enfant-2.webp" },
+  { front: "/images/categories/enfant-1.webp", back: "/images/categories/enfant-2.webp" },
 ];
 
-export default function EnfantSection() {
+export default async function EnfantSection() {
+  let allPairs = await getEnfantPairs();
+  if (!allPairs.length) allPairs = FALLBACK_PAIRS;
+
   return (
     <section className={styles.section} id="enfant">
       <div className="text-center">
@@ -20,28 +23,13 @@ export default function EnfantSection() {
         </p>
       </div>
 
-      <div className={`${styles.grid} stagger`}>
-        {ENFANT_IMAGES.map((img, i) => (
-          <div key={i} className={`${styles.card} reveal`}>
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              className={styles.cardImage}
-              sizes="(max-width: 600px) 50vw, 200px"
-            />
-            <div className={styles.cardOverlay} />
-          </div>
-        ))}
-      </div>
+      <EnfantGrid allPairs={allPairs} />
 
       <div className={styles.ctaRow}>
         <a
-          href="https://wa.me/33XXXXXXXXXX?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20collection%20enfant"
+          href="/enfant"
           className="btn btn-outline"
-          target="_blank"
-          rel="noopener noreferrer"
-          id="btn-enfant-whatsapp"
+          id="btn-enfant-collection"
         >
           Voir la collection enfant
         </a>

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -8,49 +7,11 @@ export default function Footer() {
     <footer className={styles.footer} id="footer">
       <div className={styles.footerContent}>
         <div className={styles.brand}>
-          <Image
-            src="/images/logos/logoimagetexte.png"
-            alt="Sublime Wax"
-            width={130}
-            height={50}
-            style={{ filter: "brightness(10) invert(0)", width: "auto", height: "auto" }}
-          />
+          <div className={styles.logoMark} aria-label="PriStyle">PS</div>
           <p className={styles.brandDesc}>
             Haute couture africaine sur mesure. Des créations uniques en tissu
             wax, confectionnées avec passion et savoir-faire artisanal.
           </p>
-          <div className={styles.socialLinks}>
-            <a
-              href="https://www.instagram.com/"
-              className={styles.socialLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              id="footer-instagram"
-            >
-              📸
-            </a>
-            <a
-              href="https://www.facebook.com/"
-              className={styles.socialLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              id="footer-facebook"
-            >
-              📘
-            </a>
-            <a
-              href="https://wa.me/33XXXXXXXXXX"
-              className={styles.socialLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp"
-              id="footer-whatsapp"
-            >
-              💬
-            </a>
-          </div>
         </div>
 
         <div>
@@ -113,12 +74,12 @@ export default function Footer() {
 
       <div className={styles.footerBottom}>
         <span className={styles.copyright}>
-          © {year} Sublime Wax — Tous droits réservés
+          © {year} PriStyle — Tous droits réservés
         </span>
         <span className={styles.footerCredit}>
-          Créé avec ♥ par{" "}
-          <a href="https://matricx.fr" target="_blank" rel="noopener noreferrer">
-            Matricx Consulting
+          Powered by{" "}
+          <a href="https://brianbiendou.com" target="_blank" rel="noopener noreferrer">
+            Brian BIENDOU
           </a>
         </span>
       </div>

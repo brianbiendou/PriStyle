@@ -40,9 +40,16 @@ export async function getCategoryCardsData(categorySlug) {
   return subcategories.map(sub => {
     const allImages = sub.products.flatMap(p => p.product_images.map(img => img.image_url));
     const count = sub.products.length;
-    
-    const image1 = allImages.length > 0 ? STORAGE_URL + allImages[0] : '/images/logos/logoimageonly.png';
-    const image2 = allImages.length > 1 ? STORAGE_URL + allImages[1] : image1;
+
+    // Shuffle pour afficher des images différentes à chaque visite
+    const shuffled = [...allImages];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    const image1 = shuffled.length > 0 ? STORAGE_URL + shuffled[0] : '/images/logos/logoimageonly.png';
+    const image2 = shuffled.length > 1 ? STORAGE_URL + shuffled[1] : image1;
 
     const words = sub.name.split(' ');
     let title = sub.name;
@@ -58,6 +65,115 @@ export async function getCategoryCardsData(categorySlug) {
       count
     };
   }).filter(cat => cat.count > 0);
+}
+
+export async function getEnfantPairs() {
+  const { data: category, error: catError } = await supabase
+    .from('categories')
+    .select('id')
+    .eq('slug', 'enfant')
+    .single();
+
+  if (catError || !category) {
+    console.error('Error fetching enfant category:', catError);
+    return [];
+  }
+
+  const { data: subcategories, error: subError } = await supabase
+    .from('subcategories')
+    .select('id')
+    .eq('category_id', category.id);
+
+  if (subError || !subcategories?.length) {
+    console.error('Error fetching enfant subcategories:', subError);
+    return [];
+  }
+
+  const subcatIds = subcategories.map(s => s.id);
+
+  const { data: products, error: prodError } = await supabase
+    .from('products')
+    .select('id, product_images(image_url)')
+    .in('subcategory_id', subcatIds)
+    .eq('is_active', true);
+
+  if (prodError || !products) {
+    console.error('Error fetching enfant products:', prodError);
+    return [];
+  }
+
+  const allUrls = products.flatMap(p => p.product_images.map(img => img.image_url));
+
+  // Grouper par base de nom : "enfant/tenues/robe-xxx-01.webp" → base "robe-xxx"
+  const groups = {};
+  for (const url of allUrls) {
+    const filename = url.split('/').pop().replace('.webp', '');
+    const base = filename.replace(/-0\d$/, '');
+    if (!groups[base]) groups[base] = [];
+    groups[base].push(STORAGE_URL + url);
+  }
+
+  // Retourner uniquement les paires (modèles avec 2 angles)
+  return Object.values(groups)
+    .filter(imgs => imgs.length >= 1)
+    .map(imgs => ({ front: imgs[0], back: imgs[1] || imgs[0] }));
+}
+
+export async function getCollectionSubcategories(categorySlug) {
+  const { data: category, error: catError } = await supabase
+    .from('categories')
+    .select('id')
+    .eq('slug', categorySlug)
+    .single();
+
+  if (catError || !category) return [];
+
+  const { data: subcategories, error } = await supabase
+    .from('subcategories')
+    .select('id, name, slug, products(id)')
+    .eq('category_id', category.id)
+    .order('display_order');
+
+  if (error || !subcategories) return [];
+
+  return subcategories
+    .map(sub => ({ name: sub.name, slug: sub.slug, count: sub.products?.length || 0 }))
+    .filter(s => s.count > 0);
+}
+
+export async function getSubcategoryProducts(subcategorySlug, page = 1, limit = 18) {
+  const { data: subcategory, error: subError } = await supabase
+    .from('subcategories')
+    .select('id')
+    .eq('slug', subcategorySlug)
+    .single();
+
+  if (subError || !subcategory) return { products: [], total: 0 };
+
+  const { count } = await supabase
+    .from('products')
+    .select('*', { count: 'exact', head: true })
+    .eq('subcategory_id', subcategory.id);
+
+  const from = (page - 1) * limit;
+  const to = page * limit - 1;
+
+  const { data: products, error: prodError } = await supabase
+    .from('products')
+    .select('id, product_images(image_url)')
+    .eq('subcategory_id', subcategory.id)
+    .range(from, to);
+
+  if (prodError || !products) return { products: [], total: count || 0 };
+
+  const result = products
+    .filter(p => p.product_images?.length > 0)
+    .map(p => ({
+      id: p.id,
+      src: STORAGE_URL + p.product_images[0].image_url,
+    }));
+
+  return { products: result, total: count || 0 };
 }
 
 export async function getMarriageImages() {

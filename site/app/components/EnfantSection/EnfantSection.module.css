@@ -3,15 +3,17 @@
   background: var(--color-white);
 }
 
+/* ===== GRILLE 4 CARTES ===== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  max-width: var(--container-max);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  max-width: 1200px;
   margin: var(--space-2xl) auto 0;
   padding: 0 var(--container-padding);
 }
 
+/* ===== CARTE ===== */
 .card {
   position: relative;
   aspect-ratio: 3 / 4;
@@ -19,28 +21,77 @@
   overflow: hidden;
   box-shadow: var(--shadow-md);
   cursor: pointer;
-  transition: all var(--transition-base);
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-xl);
+  background: var(--color-cream);
 }
 
 .cardImage {
   object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  object-position: top center; /* coupe le logo en bas */
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
 }
 
-.card:hover .cardImage {
-  transform: scale(1.06);
+.card:hover .cardImage:not(.cardImageBack),
+.card:hover .cardImageBack.cardImageBackVisible {
+  transform: scale(1.05);
 }
 
+/* Image avant cachée quand on montre le dos */
+.cardImageHidden {
+  opacity: 0;
+}
+
+/* Image dos — invisible par défaut, cross-fade au hover */
+.cardImageBack {
+  opacity: 0;
+  transition: opacity 0.45s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cardImageBackVisible {
+  opacity: 1;
+}
+
+/* Overlay dégradé bas */
 .cardOverlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, transparent 50%, rgba(26,26,26,0.4) 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 55%,
+    rgba(26, 26, 26, 0.45) 100%
+  );
+  transition: background var(--transition-base);
+}
+
+.card:hover .cardOverlay {
+  background: linear-gradient(
+    180deg,
+    transparent 30%,
+    rgba(26, 26, 26, 0.2) 55%,
+    rgba(26, 26, 26, 0.6) 100%
+  );
+}
+
+/* Indication visuelle bas de carte */
+.cardHint {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .cardHint {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .ctaRow {
@@ -48,9 +99,22 @@
   margin-top: var(--space-2xl);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Sur mobile tap visible */
+  .cardHint {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
+    padding: 0 1rem;
   }
 }

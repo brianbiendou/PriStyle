@@ -13,6 +13,17 @@
   margin: var(--space-3xl) auto 0;
   overflow: hidden;
   padding: 1rem 0;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.grabbing {
+  cursor: grabbing;
+}
+
+.grabbing * {
+  pointer-events: none;
 }
 
 /* Fondu gauche — aligné sur la bordure du conteneur */
@@ -55,21 +66,10 @@
   display: flex;
   gap: 1.25rem;
   width: max-content;
-  animation: scrollMarriage 192s linear infinite;
+  will-change: transform;
 }
 
-.carouselTrack:hover {
-  animation-play-state: paused;
-}
 
-@keyframes scrollMarriage {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-50% - 0.625rem));
-  }
-}
 
 .marriageCard {
   flex: 0 0 300px;
@@ -194,6 +194,12 @@
 }
 
 @media (max-width: 768px) {
+  .ctaRow :global(.btn) {
+    padding: 10px 20px;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+  }
+
   .marriageCard {
     flex: 0 0 240px;
   }
@@ -201,10 +207,6 @@
   .carouselOuter::before,
   .carouselOuter::after {
     width: 60px;
-  }
-
-  .carouselTrack {
-    animation-duration: 144s;
   }
 
   .stats {

@@ -13,7 +13,7 @@ export default function GenderSection() {
       </div>
 
       <div className={styles.grid}>
-        <a href="#homme" className={`${styles.card} reveal`} id="card-pour-lui">
+        <a href="/homme" className={styles.card} id="card-pour-lui">
           <div className={styles.cardImageWrapper}>
             <Image
               src="/images/genre/homme.webp"
@@ -26,11 +26,11 @@ export default function GenderSection() {
           <div className={styles.cardOverlay} />
           <div className={styles.cardContent}>
             <h3 className={styles.cardLabel}>Pour Lui</h3>
-            <span className={styles.cardBtn}>Découvrez la collection homme</span>
+        <span className={styles.cardBtn}>Découvrez la collection homme →</span>
           </div>
         </a>
 
-        <a href="#femme" className={`${styles.card} reveal`} id="card-pour-elle">
+        <a href="/femme" className={styles.card} id="card-pour-elle">
           <div className={styles.cardImageWrapper}>
             <Image
               src="/images/genre/femme.webp"
@@ -43,7 +43,7 @@ export default function GenderSection() {
           <div className={styles.cardOverlay} />
           <div className={styles.cardContent}>
             <h3 className={styles.cardLabel}>Pour Elle</h3>
-            <span className={styles.cardBtn}>Découvrez la collection femme</span>
+        <span className={styles.cardBtn}>Découvrez la collection femme →</span>
           </div>
         </a>
       </div>

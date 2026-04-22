@@ -49,17 +49,24 @@
   overflow: hidden;
   position: relative;
   padding: 1rem 0;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.grabbing {
+  cursor: grabbing;
+}
+
+.grabbing * {
+  pointer-events: none;
 }
 
 .carouselTrack {
   display: flex;
   gap: 2rem;
   width: max-content;
-  animation: scroll 240s linear infinite;
-}
-
-.carouselTrack:hover {
-  animation-play-state: paused;
+  will-change: transform;
 }
 
 .carouselItem {
@@ -136,15 +143,7 @@
   margin: 0;
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    /* Since we duplicated the items array, we translate by half the total width including gap */
-    transform: translateX(calc(-50% - 1rem));
-  }
-}
+
 
 @media (max-width: 768px) {
   .section {
@@ -158,10 +157,6 @@
   .title::before,
   .title::after {
     display: none;
-  }
-  
-  .carouselTrack {
-    animation-duration: 180s;
   }
   
   .ctaBtn {

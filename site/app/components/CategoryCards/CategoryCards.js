@@ -2,10 +2,10 @@ import Image from "next/image";
 import styles from "./CategoryCards.module.css";
 import { getCategoryCardsData } from "@/lib/data";
 
-function CategoryCard({ title, image1, image2, count, slug }) {
+function CategoryCard({ title, image1, image2, count, slug, gender }) {
   return (
     <a
-      href={`#${slug}`}
+      href={`/${gender}?cat=${slug}&page=1`}
       className={`${styles.card} reveal`}
       id={`category-card-${slug}`}
     >
@@ -66,16 +66,12 @@ export default async function CategoryCards() {
 
         <div className={`${styles.grid} stagger`}>
           {femmeCategories.map((cat) => (
-            <CategoryCard key={cat.slug} {...cat} />
+            <CategoryCard key={cat.slug} {...cat} gender="femme" />
           ))}
         </div>
 
         <div className={styles.ctaRow}>
-          <a
-            href="#"
-            className="btn btn-outline"
-            id="btn-toutes-collections-femme"
-          >
+          <a href="/femme" className="btn btn-outline" id="btn-toutes-collections-femme">
             Toutes les collections femme
           </a>
         </div>
@@ -99,16 +95,12 @@ export default async function CategoryCards() {
 
         <div className={`${styles.grid} stagger`}>
           {hommeCategories.map((cat) => (
-            <CategoryCard key={cat.slug} {...cat} />
+            <CategoryCard key={cat.slug} {...cat} gender="homme" />
           ))}
         </div>
 
         <div className={styles.ctaRow}>
-          <a
-            href="#"
-            className="btn btn-outline"
-            id="btn-toutes-collections-homme"
-          >
+          <a href="/homme" className="btn btn-outline" id="btn-toutes-collections-homme">
             Toutes les collections homme
           </a>
         </div>

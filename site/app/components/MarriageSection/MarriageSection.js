@@ -50,6 +50,9 @@ export default async function MarriageSection() {
         >
           💬 Discuter de votre tenue de mariage
         </a>
+        <a href="/mariage" className="btn btn-outline">
+          Voir toutes les tenues
+        </a>
       </div>
     </section>
   );
