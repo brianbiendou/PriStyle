@@ -20,13 +20,18 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # ─── Config ──────────────────────────────────────────────────────────────────
 
-SUPABASE_URL = "https://hycvllacbcyetrvogpdl.supabase.co"
-SUPABASE_SERVICE_KEY = (
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
-    ".eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh5Y3ZsbGFjYmN5ZXRydm9ncGRsIiwicm9sZSI6"
-    "InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3Njc2Mzc2MCwiZXhwIjoyMDkyMzM5NzYwfQ"
-    ".4JWpbWZIphqvC9dXB_FOUQr5BN30iy4iVFwk7uZkCes"
-)
+# Charger .env si présent
+_env_path = os.path.join(os.path.dirname(__file__), '.env')
+if os.path.exists(_env_path):
+    with open(_env_path) as _f:
+        for _line in _f:
+            _line = _line.strip()
+            if _line and not _line.startswith('#') and '=' in _line:
+                _k, _v = _line.split('=', 1)
+                os.environ.setdefault(_k.strip(), _v.strip())
+
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://hycvllacbcyetrvogpdl.supabase.co")
+SUPABASE_SERVICE_KEY = os.environ["SUPABASE_SERVICE_KEY"]
 BUCKET = "catalog-media"
 BASE_DIR = r"d:\MatricxConsulting\PriStyle\sublime-wax\femme\robes-africaines"
 
