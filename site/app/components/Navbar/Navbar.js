@@ -55,8 +55,8 @@ export default function Navbar() {
             <Image
               src={scrolled ? "/images/logos/logotextonly.png" : "/images/logos/logoimagetexte.png"}
               alt="Sublime Wax"
-              width={120}
-              height={45}
+              width={256}
+              height={96}
               className={styles.logoImage}
               style={{ width: "auto" }}
               priority

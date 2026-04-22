@@ -5,6 +5,7 @@
   right: 0;
   z-index: 1000;
   padding: 0.65rem 0;
+  overflow: visible;
   transition: all var(--transition-base);
 }
 
@@ -31,13 +32,18 @@
 }
 
 .logoImage {
-  height: 54px;
+  height: 130px;
   width: auto;
-  transition: all var(--transition-base);
+  /* Marges négatives : le logo déborde sans gonfler la hauteur du header */
+  margin-top: -15px;
+  margin-bottom: -65px;
+  transition: height var(--transition-base), margin var(--transition-base), filter var(--transition-base);
 }
 
 .navbar.scrolled .logoImage {
-  height: 54px;
+  height: 52px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .navLinks {

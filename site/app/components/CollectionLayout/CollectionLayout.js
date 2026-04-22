@@ -3,10 +3,13 @@ import Image from 'next/image';
 import styles from './CollectionLayout.module.css';
 
 const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
-const WA_MESSAGE = encodeURIComponent('Bonjour, je suis intéressé(e) par ce modèle PriStyle. Pouvez-vous me donner plus d\'informations ?');
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://pristyle.vercel.app';
+const STORAGE_PREFIX = process.env.NEXT_PUBLIC_SUPABASE_URL + '/storage/v1/object/public/catalog-media/';
 
 function buildWaLink(src) {
-  const msg = encodeURIComponent(`Bonjour, je suis intéressé(e) par ce modèle PriStyle : ${src}`);
+  const imagePath = src.startsWith(STORAGE_PREFIX) ? src.slice(STORAGE_PREFIX.length) : src;
+  const shareUrl = `${SITE_URL}/p/${imagePath}`;
+  const msg = encodeURIComponent(`Bonjour, je suis intéressé(e) par ce modèle PriStyle : ${shareUrl}`);
   return `https://wa.me/${WA_NUMBER}?text=${msg}`;
 }
 

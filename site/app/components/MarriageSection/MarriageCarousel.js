@@ -8,9 +8,13 @@ const SPEED = 83;          // px/s — identique à l'animation CSS originale (1
 const RESUME_DELAY = 5000; // ms avant reprise auto après drag
 
 const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://pristyle.vercel.app';
+const STORAGE_PREFIX = process.env.NEXT_PUBLIC_SUPABASE_URL + '/storage/v1/object/public/catalog-media/';
 
 function buildWaLink(imageSrc) {
-  const msg = `Bonjour, je suis intéressé(e) par ce modèle de tenue mariage PriStyle : ${imageSrc}`;
+  const imagePath = imageSrc.startsWith(STORAGE_PREFIX) ? imageSrc.slice(STORAGE_PREFIX.length) : imageSrc;
+  const shareUrl = `${SITE_URL}/p/${imagePath}`;
+  const msg = `Bonjour, je suis intéressé(e) par ce modèle de tenue mariage PriStyle : ${shareUrl}`;
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
 

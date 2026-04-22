@@ -50,7 +50,7 @@
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-black);
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-sm);
   text-align: center;
 }
 
@@ -77,14 +77,11 @@
 }
 
 .cardIcon {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(220, 100, 120, 0.12);
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
   flex-shrink: 0;
   margin-bottom: var(--space-xs);
 }
@@ -131,7 +128,7 @@
   border-radius: var(--radius-md);
   overflow: hidden;
   flex: 1;
-  min-height: 200px;
+  min-height: 240px;
   width: 100%;
 }
 
@@ -140,32 +137,21 @@
   height: 100%;
   border: none;
   display: block;
-  min-height: 200px;
+  min-height: 240px;
 }
 
-.mapOverlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: var(--space-md);
-  transition: background 0.3s ease;
+/* Bouton WA pleine largeur dans la carte */
+.waBtn {
+  width: 100%;
+  text-align: center;
+  padding: 14px 20px;
 }
 
-.mapOverlay:hover {
-  background: rgba(0, 0, 0, 0.08);
-}
-
-.mapCta {
-  background: white;
-  color: var(--color-black);
-  font-size: 0.78rem;
-  font-weight: 600;
-  padding: 7px 16px;
-  border-radius: var(--radius-full);
-  box-shadow: var(--shadow-md);
-  letter-spacing: 0.02em;
+/* Bouton WA pleine largeur dans la carte */
+.waBtn {
+  width: 100%;
+  text-align: center;
+  padding: 14px 20px;
 }
 
 @media (max-width: 720px) {
