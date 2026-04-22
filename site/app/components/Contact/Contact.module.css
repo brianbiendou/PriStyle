@@ -41,81 +41,98 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-2xl);
-  align-items: start;
+  gap: var(--space-xl);
+  align-items: stretch;
 }
 
 .colTitle {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-black);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  text-align: center;
 }
 
-/* ===== GAUCHE : COORDONNÉES ===== */
-.coordonnees {
+/* ===== CARTES BORDÉES ===== */
+.coordonnees,
+.localisation {
+  border: 1.5px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  padding: var(--space-xl) var(--space-lg);
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-lg);
 }
 
+/* ===== GAUCHE : COORDONNÉES ===== */
 .card {
   display: flex;
-  gap: var(--space-md);
-  align-items: flex-start;
-  padding: var(--space-lg) 0;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
 }
 
 .cardIcon {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: rgba(200, 169, 97, 0.12);
+  background: rgba(220, 100, 120, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   flex-shrink: 0;
+  margin-bottom: var(--space-xs);
 }
 
 .cardBody {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
 }
 
 .cardLabel {
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--color-black);
 }
 
 .cardSub {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--color-gray);
 }
 
 .cardValue {
-  font-size: 0.85rem;
+  font-size: 1.25rem;
+  color: var(--color-black);
+  font-weight: 700;
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.cardValue:hover {
   color: var(--color-gold);
-  font-weight: 600;
-  margin-top: 4px;
 }
 
 /* ===== DROITE : LOCALISATION ===== */
 .localisation {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
+  align-items: stretch;
 }
 
 .mapWrapper {
   position: relative;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  height: 210px;
-  box-shadow: var(--shadow-sm);
+  flex: 1;
+  min-height: 200px;
+  width: 100%;
 }
 
 .map {
@@ -123,6 +140,7 @@
   height: 100%;
   border: none;
   display: block;
+  min-height: 200px;
 }
 
 .mapOverlay {
@@ -136,7 +154,7 @@
 }
 
 .mapOverlay:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.08);
 }
 
 .mapCta {
@@ -150,30 +168,14 @@
   letter-spacing: 0.02em;
 }
 
-.addressCard {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  background: white;
-  border-radius: var(--radius-md);
-  padding: var(--space-md) var(--space-lg);
-  box-shadow: var(--shadow-sm);
-}
-
-.addressIcon {
-  font-size: 1.2rem;
-}
-
-.addressLine {
-  font-size: 0.82rem;
-  color: var(--color-gold);
-  font-weight: 500;
-  line-height: 1.6;
-}
-
 @media (max-width: 720px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .coordonnees,
+  .localisation {
+    padding: var(--space-lg);
   }
 }
 

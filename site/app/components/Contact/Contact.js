@@ -1,5 +1,8 @@
 import styles from "./Contact.module.css";
 
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Bonjour, je suis intéressé(e) par vos créations PriStyle')}`;
+
 export default function Contact() {
   return (
     <section className={styles.section} id="contact">
@@ -24,7 +27,7 @@ export default function Contact() {
             </div>
 
             <a
-              href="https://wa.me/33644814218?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20vos%20cr%C3%A9ations%20PriStyle"
+              href={WA_LINK}
               className="btn btn-whatsapp"
               target="_blank"
               rel="noopener noreferrer"

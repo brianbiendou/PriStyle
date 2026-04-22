@@ -312,6 +312,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 6px;
+    justify-content: flex-start;
   }
 
   .catLink {

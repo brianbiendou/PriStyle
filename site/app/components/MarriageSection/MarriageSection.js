@@ -42,7 +42,7 @@ export default async function MarriageSection() {
 
       <div className={styles.ctaRow}>
         <a
-          href="https://wa.me/33644814218?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20une%20tenue%20de%20mariage"
+          href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent('Bonjour, je suis intéressé(e) par une tenue de mariage PriStyle')}`}
           className="btn btn-primary"
           target="_blank"
           rel="noopener noreferrer"

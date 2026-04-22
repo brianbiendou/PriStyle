@@ -1,5 +1,7 @@
 // Contourne la vérification SSL (proxy d'entreprise / VPN) — dev uniquement
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+if (process.env.NODE_ENV !== 'production') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+}
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -23,15 +25,6 @@ const nextConfig = {
   // Headers de cache agressifs pour les assets statiques
   async headers() {
     return [
-      {
-        source: "/_next/image(.*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
       {
         source: "/images/:path*",
         headers: [

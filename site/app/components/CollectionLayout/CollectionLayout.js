@@ -2,10 +2,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './CollectionLayout.module.css';
 
-const WA_BASE = 'https://wa.me/33644814218?text=';
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+const WA_MESSAGE = encodeURIComponent('Bonjour, je suis intéressé(e) par ce modèle PriStyle. Pouvez-vous me donner plus d\'informations ?');
 
 function buildWaLink(src) {
-  return WA_BASE + encodeURIComponent(`Bonjour, je suis intéressé(e) par ce modèle : ${src}`);
+  const msg = encodeURIComponent(`Bonjour, je suis intéressé(e) par ce modèle PriStyle : ${src}`);
+  return `https://wa.me/${WA_NUMBER}?text=${msg}`;
 }
 
 export default function CollectionLayout({

@@ -7,10 +7,10 @@ import styles from "./MarriageSection.module.css";
 const SPEED = 83;          // px/s — identique à l'animation CSS originale (192s)
 const RESUME_DELAY = 5000; // ms avant reprise auto après drag
 
-const WA_NUMBER = "33644814218";
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
 
 function buildWaLink(imageSrc) {
-  const msg = `Bonjour, je suis intéressé(e) par ce modèle de robe : ${imageSrc}`;
+  const msg = `Bonjour, je suis intéressé(e) par ce modèle de tenue mariage PriStyle : ${imageSrc}`;
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
 

@@ -76,7 +76,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="https://wa.me/33XXXXXXXXXX"
+              href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent('Bonjour, je souhaite vous contacter pour une création PriStyle')}`}
               className={`btn btn-primary ${styles.navCta}`}
               target="_blank"
               rel="noopener noreferrer"
