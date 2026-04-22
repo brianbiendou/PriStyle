@@ -133,6 +133,32 @@
   z-index: 2;
 }
 
+.marriageCta {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  opacity: 0;
+  z-index: 3;
+  white-space: nowrap;
+  background: rgba(200, 169, 97, 0.92);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.marriageCard:hover .marriageCta {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 /* ===== STATS ===== */
 .stats {
   display: flex;

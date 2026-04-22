@@ -14,6 +14,13 @@ function shuffleAndPick(arr, count) {
   return copy.slice(0, Math.min(count, copy.length));
 }
 
+const WA_NUMBER = "33644814218";
+
+function buildWaLink(imageSrc) {
+  const msg = `Bonjour, je suis intéressé(e) par ce modèle de robe : ${imageSrc}`;
+  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+}
+
 export default function MarriageCarousel({ allImages }) {
   const [items, setItems] = useState([]);
 
@@ -43,6 +50,15 @@ export default function MarriageCarousel({ allImages }) {
             {img.isBestSeller && (
               <span className={styles.goldBadge}>Best-seller</span>
             )}
+            <a
+              href={buildWaLink(img.src)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.marriageCta}
+              onClick={(e) => e.stopPropagation()}
+            >
+              ✦ Commander sur mesure
+            </a>
           </div>
         ))}
       </div>
