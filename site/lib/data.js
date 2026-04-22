@@ -59,3 +59,52 @@ export async function getCategoryCardsData(categorySlug) {
     };
   }).filter(cat => cat.count > 0);
 }
+
+export async function getMarriageImages() {
+  const { data: category, error: catError } = await supabase
+    .from('categories')
+    .select('id')
+    .eq('slug', 'tenue-mariage')
+    .single();
+
+  if (catError || !category) {
+    console.error('Error fetching mariage category:', catError);
+    return [];
+  }
+
+  const { data: subcategories, error: subError } = await supabase
+    .from('subcategories')
+    .select('id')
+    .eq('category_id', category.id);
+
+  if (subError || !subcategories?.length) {
+    console.error('Error fetching mariage subcategories:', subError);
+    return [];
+  }
+
+  const subcatIds = subcategories.map(s => s.id);
+
+  const { data: products, error: prodError } = await supabase
+    .from('products')
+    .select(`
+      id,
+      is_best_seller,
+      product_images (
+        image_url
+      )
+    `)
+    .in('subcategory_id', subcatIds)
+    .eq('is_active', true);
+
+  if (prodError || !products) {
+    console.error('Error fetching mariage products:', prodError);
+    return [];
+  }
+
+  return products.flatMap(p =>
+    p.product_images.map(img => ({
+      src: STORAGE_URL + img.image_url,
+      isBestSeller: p.is_best_seller,
+    }))
+  );
+}

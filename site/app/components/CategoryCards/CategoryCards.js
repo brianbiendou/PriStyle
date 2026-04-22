@@ -53,12 +53,14 @@ export default async function CategoryCards() {
         className={`${styles.section} ${styles.sectionFemme}`}
         id="femme"
       >
-        <div className="text-center">
-          <span className="section-label">Pour Elle</span>
-          <h2 className="section-title">Collection Femme</h2>
-          <p className="section-subtitle center">
-            Robes, boubous, jupes et vestes — l&apos;élégance africaine
-            réinventée pour la femme moderne
+        <div className={styles.sectionHeader}>
+          <div className={styles.sectionHeaderText}>
+            <span className={styles.sectionEyebrow}>Pour Elle</span>
+            <h2 className={styles.sectionTitleLarge}>Collection Femme</h2>
+          </div>
+          <div className={styles.sectionDivider} />
+          <p className={styles.sectionSubtitleSide}>
+            Robes, boubous, jupes et vestes — l&apos;élégance africaine réinventée
           </p>
         </div>
 
@@ -84,12 +86,14 @@ export default async function CategoryCards() {
         className={`${styles.section} ${styles.sectionHomme}`}
         id="homme"
       >
-        <div className="text-center">
-          <span className="section-label">Pour Lui</span>
-          <h2 className="section-title">Collection Homme</h2>
-          <p className="section-subtitle center">
-            Boubous majestueux, ensembles raffinés et chemises wax — l&apos;art
-            du style masculin africain
+        <div className={styles.sectionHeader}>
+          <div className={styles.sectionHeaderText}>
+            <span className={styles.sectionEyebrow}>Pour Lui</span>
+            <h2 className={styles.sectionTitleLarge}>Collection Homme</h2>
+          </div>
+          <div className={styles.sectionDivider} />
+          <p className={styles.sectionSubtitleSide}>
+            Boubous, ensembles raffinés et chemises wax — l&apos;art du style masculin
           </p>
         </div>
 

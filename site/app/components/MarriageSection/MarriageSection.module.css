@@ -4,35 +4,71 @@
   overflow: hidden;
 }
 
-.showcase {
+/* ===== CAROUSEL ===== */
+
+/* Conteneur aligné sur les bordures du conteneur principal */
+.carouselOuter {
+  position: relative;
   max-width: var(--container-max);
   margin: var(--space-3xl) auto 0;
-  padding: 0 var(--container-padding);
+  overflow: hidden;
+  padding: 1rem 0;
 }
 
-.scrollContainer {
+/* Fondu gauche — aligné sur la bordure du conteneur */
+.carouselOuter::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 140px;
+  background: linear-gradient(
+    90deg,
+    var(--color-cream) 0%,
+    rgba(250, 247, 242, 0.85) 40%,
+    transparent 100%
+  );
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Fondu droit — aligné sur la bordure du conteneur */
+.carouselOuter::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 140px;
+  background: linear-gradient(
+    270deg,
+    var(--color-cream) 0%,
+    rgba(250, 247, 242, 0.85) 40%,
+    transparent 100%
+  );
+  z-index: 3;
+  pointer-events: none;
+}
+
+.carouselTrack {
   display: flex;
   gap: 1.25rem;
-  overflow-x: auto;
-  padding-bottom: var(--space-xl);
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-gold-light) var(--color-cream-dark);
-  -webkit-overflow-scrolling: touch;
+  width: max-content;
+  animation: scrollMarriage 192s linear infinite;
 }
 
-.scrollContainer::-webkit-scrollbar {
-  height: 4px;
+.carouselTrack:hover {
+  animation-play-state: paused;
 }
 
-.scrollContainer::-webkit-scrollbar-track {
-  background: var(--color-cream-dark);
-  border-radius: 2px;
-}
-
-.scrollContainer::-webkit-scrollbar-thumb {
-  background: var(--color-gold-light);
-  border-radius: 2px;
+@keyframes scrollMarriage {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 0.625rem));
+  }
 }
 
 .marriageCard {
@@ -41,9 +77,9 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
-  scroll-snap-align: start;
   cursor: pointer;
-  transition: all var(--transition-base);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s ease;
   box-shadow: var(--shadow-md);
 }
 
@@ -97,6 +133,7 @@
   z-index: 2;
 }
 
+/* ===== STATS ===== */
 .stats {
   display: flex;
   justify-content: center;
@@ -132,9 +169,18 @@
 
 @media (max-width: 768px) {
   .marriageCard {
-    flex: 0 0 250px;
+    flex: 0 0 240px;
   }
-  
+
+  .carouselOuter::before,
+  .carouselOuter::after {
+    width: 60px;
+  }
+
+  .carouselTrack {
+    animation-duration: 144s;
+  }
+
   .stats {
     gap: var(--space-2xl);
     flex-wrap: wrap;

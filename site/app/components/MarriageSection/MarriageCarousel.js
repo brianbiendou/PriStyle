@@ -1,0 +1,51 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import styles from "./MarriageSection.module.css";
+
+// Fisher-Yates shuffle + pick N
+function shuffleAndPick(arr, count) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, Math.min(count, copy.length));
+}
+
+export default function MarriageCarousel({ allImages }) {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const picked = shuffleAndPick(allImages, 50);
+    // Dupliquer pour boucle infinie seamless
+    setItems([...picked, ...picked]);
+  }, [allImages]);
+
+  if (items.length === 0) {
+    return <div className={styles.carouselOuter} style={{ minHeight: "360px" }} />;
+  }
+
+  return (
+    <div className={styles.carouselOuter}>
+      <div className={styles.carouselTrack}>
+        {items.map((img, i) => (
+          <div key={i} className={styles.marriageCard}>
+            <Image
+              src={img.src}
+              alt={`Tenue de mariage ${(i % (items.length / 2)) + 1}`}
+              fill
+              className={styles.marriageImage}
+              sizes="300px"
+            />
+            <div className={styles.marriageOverlay} />
+            {img.isBestSeller && (
+              <span className={styles.goldBadge}>Best-seller</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

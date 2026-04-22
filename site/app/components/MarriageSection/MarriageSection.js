@@ -1,44 +1,29 @@
-"use client";
-
-import Image from "next/image";
 import styles from "./MarriageSection.module.css";
+import MarriageCarousel from "./MarriageCarousel";
+import { getMarriageImages } from "@/lib/data";
 
-const MARRIAGE_IMAGES = Array.from({ length: 8 }, (_, i) => ({
+// Fallback : images locales si Supabase vide
+const FALLBACK_IMAGES = Array.from({ length: 8 }, (_, i) => ({
   src: `/images/categories/mariage-${i + 1}.webp`,
-  alt: `Tenue de mariage couple wax ${i + 1}`,
+  isBestSeller: i < 3,
 }));
 
-export default function MarriageSection() {
+export default async function MarriageSection() {
+  let allImages = await getMarriageImages();
+  if (!allImages.length) allImages = FALLBACK_IMAGES;
+
   return (
     <section className={styles.section} id="mariage">
       <div className="text-center">
-        <span className="section-label">Mariage</span>
-        <h2 className="section-title">Sublimez Votre Union</h2>
+        <span className="section-label">Mariage sur Mesure</span>
+        <h2 className="section-title">Votre Tenue de Rêve,<br />Confectionnée pour Vous</h2>
         <p className="section-subtitle center">
-          Des tenues de couple assorties, confectionnées sur mesure pour le plus
-          beau jour de votre vie
+          Choisissez votre modèle, nous l'adaptons à vos mesures et vos couleurs.
+          <strong> 100% personnalisé, livré où vous êtes.</strong>
         </p>
       </div>
 
-      <div className={styles.showcase}>
-        <div className={styles.scrollContainer} id="marriage-scroll">
-          {MARRIAGE_IMAGES.map((img, i) => (
-            <div key={i} className={styles.marriageCard}>
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                className={styles.marriageImage}
-                sizes="300px"
-              />
-              <div className={styles.marriageOverlay} />
-              {i < 3 && (
-                <span className={styles.goldBadge}>Best-seller</span>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
+      <MarriageCarousel allImages={allImages} />
 
       <div className={`${styles.stats} reveal`}>
         <div className={styles.stat}>
