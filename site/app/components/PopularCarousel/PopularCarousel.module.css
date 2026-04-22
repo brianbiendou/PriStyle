@@ -1,0 +1,171 @@
+.section {
+  padding: 6rem 0;
+  background-color: var(--color-white);
+  overflow: hidden;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 var(--container-padding);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  color: var(--color-black);
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.title::before,
+.title::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 1px;
+  background-color: var(--color-gold);
+}
+
+.title::before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.title::after {
+  left: 100%;
+  margin-left: 15px;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--color-grey);
+}
+
+.carouselContainer {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 1rem 0;
+}
+
+.carouselTrack {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: scroll 240s linear infinite;
+}
+
+.carouselTrack:hover {
+  animation-play-state: paused;
+}
+
+.carouselItem {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.image {
+  transition: transform 0.5s ease;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.carouselItem:hover .overlay {
+  opacity: 1;
+}
+
+.carouselItem:hover .image {
+  transform: scale(1.05);
+}
+
+.ctaBtn {
+  background: var(--color-gold);
+  color: var(--color-white);
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.carouselItem:hover .ctaBtn {
+  transform: translateY(0);
+}
+
+.ctaBtn:hover {
+  background: var(--color-gold-dark);
+}
+
+.itemInfo {
+  text-align: center;
+  padding: 0 0.5rem;
+}
+
+.itemName {
+  font-size: 1.1rem;
+  font-family: var(--font-heading);
+  color: var(--color-black);
+  margin: 0;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Since we duplicated the items array, we translate by half the total width including gap */
+    transform: translateX(calc(-50% - 1rem));
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+  
+  .carouselItem {
+    width: 260px;
+  }
+  
+  .title::before,
+  .title::after {
+    display: none;
+  }
+  
+  .carouselTrack {
+    animation-duration: 180s;
+  }
+  
+  .ctaBtn {
+    padding: 10px 18px;
+    font-size: 0.8rem;
+  }
+}

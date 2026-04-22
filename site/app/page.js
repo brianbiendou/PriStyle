@@ -9,6 +9,7 @@ import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 import ScrollReveal from "./components/ScrollReveal/ScrollReveal";
+import PopularCarousel from "./components/PopularCarousel/PopularCarousel";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <main>
         <Hero />
         <Marquee />
+        <PopularCarousel />
         <GenderSection />
         <CategoryCards />
         <MarriageSection />
