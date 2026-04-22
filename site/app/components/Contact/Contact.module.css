@@ -1,0 +1,89 @@
+.section {
+  padding: var(--space-5xl) 0 var(--space-4xl);
+  background: linear-gradient(
+    180deg,
+    var(--color-cream) 0%,
+    var(--color-cream-warm) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--color-gold-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.content {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.whatsappIcon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-xl);
+  font-size: 2rem;
+  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.3);
+  animation: whatsappPulse 3s ease-in-out infinite;
+}
+
+.subtitle {
+  font-family: var(--font-accent);
+  font-size: 1.15rem;
+  color: var(--color-gray);
+  line-height: 1.7;
+  margin-bottom: var(--space-2xl);
+  font-style: italic;
+}
+
+.phone {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--color-black);
+  font-weight: 600;
+  margin-bottom: var(--space-2xl);
+  letter-spacing: 0.05em;
+}
+
+.ctaGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.orText {
+  font-size: 0.8rem;
+  color: var(--color-gray-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@keyframes whatsappPulse {
+  0%, 100% { 
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.3);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 12px 40px rgba(37, 211, 102, 0.45);
+    transform: scale(1.05);
+  }
+}

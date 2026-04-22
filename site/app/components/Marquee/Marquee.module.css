@@ -1,0 +1,62 @@
+.marquee {
+  background: var(--color-black);
+  padding: 14px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee::before,
+.marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 2;
+}
+
+.marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--color-black), transparent);
+}
+
+.marquee::after {
+  right: 0;
+  background: linear-gradient(-90deg, var(--color-black), transparent);
+}
+
+.marqueeTrack {
+  display: flex;
+  animation: marqueeScroll 30s linear infinite;
+  width: max-content;
+}
+
+.marqueeItem {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 2rem;
+  white-space: nowrap;
+}
+
+.marqueeText {
+  font-family: var(--font-accent);
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+  font-weight: 500;
+}
+
+.marqueeDot {
+  width: 4px;
+  height: 4px;
+  background: var(--color-gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}

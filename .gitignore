@@ -1,0 +1,22 @@
+# Environment variables
+.env
+.env.*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+site/node_modules/
+.npm/
+
+# Large media folders
+sublime-wax/
+
+# Next.js
+site/.next/
+site/out/
+site/build/
